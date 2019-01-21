@@ -1,0 +1,19 @@
+.phone {
+	height: 800px;
+	width: 500px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	background-image: url(images/phone.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.box {
+	margin-right: auto;
+	margin-left: auto;
+	width: 250px;
+	text-align: center;
+	position: relative;
+	top: 99px;
+}

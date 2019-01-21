@@ -1,0 +1,141 @@
+<!DOCTYPE html">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Art Clock -sample-</title>
+    <link href="layout.css" rel="stylesheet" type="text/css" />
+    <script>
+        var dates, min, sec, hour;
+        var color = [];
+        var color_light = [
+            "#FF001E",
+            "#FF6200",
+            "#FFE100",
+            "#1EFF00",
+            "#00FF73",
+            "#00FFE1",
+            "#001EFF",
+            "#6200FF",
+            "#E100FF",
+            "#FF009D",
+        ];
+        var color_dark = [
+            "#CC0018",
+            "#CC4E00",
+            "#CCB400",
+            "#7ECC00",
+            "#00CC5C",
+            "#00CCB4",
+            "#0018CC",
+            "#4E00CC",
+            "#B400CC",
+            "#CC007E",
+        ];
+
+        function clock(timestamp) {
+            //現在の時刻を取得
+            dates = new Date();
+            hour = dates.getHours();    //0-23
+            min = dates.getMinutes();   //0-59
+            sec = dates.getSeconds();   //0-59
+            
+            var hour_ones_place, hour_tens_place;
+            var min_ones_place, min_tens_place;
+            var sec_ones_place, sec_tens_place;
+            
+            //AM or PM
+            if(hour < 12) { //0,1,2,3,4,5,6,7,8,9,10,11
+                color = color_light;
+            }else { //12,13,14,15,16,17,18,19,20,21,22,23
+                color = color_dark;
+                hour = hour-12;//24->12へ
+            }
+            
+            //Hour
+            if(hour < 10){
+                hour_tens_place = 0;
+            }else{
+                hour_tens_place = parseInt(hour/10);
+            }
+            hour_ones_place = hour%10;
+            
+            //Min
+            if(min < 10){
+                min_tens_place = 0;
+            }else{
+                min_tens_place = parseInt(min/10);
+            }
+            min_ones_place = min%10;
+            
+            //Sec
+            if(sec < 10){
+                sec_tens_place = 0;
+            }else{
+                sec_tens_place = parseInt(sec/10);
+            }
+            sec_ones_place = sec%10;
+            
+            // コンテキストオブジェクトを取得
+            var cv = document.querySelector('#cv');
+            var c = cv.getContext('2d');
+
+            c.strokeStyle = "rgba(0,0,0,0)";
+
+            //時*10
+            c.fillStyle = color[hour_tens_place];
+            c.fillRect(0, 0, 125, 375);
+            
+            //時
+            c.fillStyle = color[hour_ones_place];
+            c.fillRect(125, 0, 250, 375);
+
+            //分*10
+            c.fillStyle = color[min_tens_place];
+            c.beginPath();
+            c.moveTo(0, 295);
+            c.lineTo(125, 295);
+            c.lineTo(125, 75);
+            c.closePath();
+            c.stroke();
+            c.fill();
+            //分
+            c.fillStyle = color[min_ones_place];
+            c.beginPath();
+            c.moveTo(125, 295);
+            c.lineTo(250, 295);
+            c.lineTo(125, 75);
+            c.closePath();
+            c.stroke();
+            c.fill();
+
+            //秒*10
+            c.fillStyle = color[sec_tens_place];
+            c.beginPath();
+            c.arc(125, 222, 72.5, Math.PI / 2, Math.PI * 3 / 2, false);
+            c.stroke();
+            c.fill();
+            
+            //秒
+            c.fillStyle = color[sec_ones_place];
+            c.beginPath();
+            c.arc(125, 222, 72.5, Math.PI / 2, Math.PI * 3 / 2, true);
+            c.stroke();
+            c.fill();
+
+            window.requestAnimationFrame((ts) => clock(ts));
+        }
+        window.requestAnimationFrame((ts) => clock(ts));
+        
+    </script>
+</head>
+
+<body onLoad="clock();">
+    <div class="phone">
+        <div class="box">
+            <canvas id="cv" width="251" height="375">
+            </canvas>
+        </div>
+    </div>
+</body>
+
+</html>

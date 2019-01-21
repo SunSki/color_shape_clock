@@ -1,0 +1,39 @@
+0:red
+#FF001E
+#CC0018
+
+1:orange
+#FF6200
+#CC4E00
+
+2:yellow
+#FFE100
+#CCB400
+
+3:green yellow
+#1EFF00
+#7ECC00
+
+4:green
+#00FF73
+#00CC5C
+
+5:bluewish green.
+#00FFE1
+#00CCB4
+
+6:blue
+#001EFF
+#0018CC
+
+7:dark blue
+#6200FF
+#4E00CC
+
+8:purple
+#E100FF
+#B400CC
+
+9:pink
+#FF009D
+#CC007E
